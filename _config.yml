@@ -1,0 +1,40 @@
+title: DevDesk Theme for Jekyll
+description: A polished, responsive knowledge-base and blog template powered by Jekyll.
+hero_subheading: Publish product docs, guides, and updates with a clean support-style UI.
+baseurl: ""
+url: ""
+lang: en
+timezone: UTC
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-feed
+
+collections:
+  posts:
+    output: true
+
+permalink: /:categories/:year/:month/:day/:title/
+
+home_posts_limit: 4
+
+nav_links:
+  - label: Home
+    url: /
+  - label: Documentation
+    url: /#articles
+  - label: GitHub
+    url: https://github.com/username/repository
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      image: /assets/images/posts/monitor-icon-alt.svg
+
+exclude:
+  - vendor
+  - node_modules
+  - README_drafts

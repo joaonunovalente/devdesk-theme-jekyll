@@ -1,0 +1,50 @@
+---
+layout: default
+title: Home
+---
+
+<section id="articles" class="help-featured-section theme-section pt-4">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h2 class="section-title mt-5 mb-4">Articles</h2>
+    </div>
+
+    {% assign posts_limit = site.home_posts_limit | default: 6 %}
+    {% if site.posts.size > 0 %}
+      <div class="row" id="post-list" data-posts-limit="{{ posts_limit }}">
+        {% for post in site.posts %}
+          <div
+            class="item col-12 py-3 post-item"
+            data-title="{{ post.title | downcase }}"
+            data-preview="{{ post.preview | default: post.excerpt | strip_html | downcase }}"
+          >
+            <article class="item-inner homepage-post-card shadow rounded-4 p-4 bg-white d-flex align-items-stretch gap-3">
+              <div class="homepage-post-image-holder flex-shrink-0">
+                <img
+                  class="homepage-post-image"
+                  src="{{ post.image | default: '/assets/images/posts/monitor-icon-alt.svg' | relative_url }}"
+                  alt="Cover image for {{ post.title }}"
+                />
+              </div>
+              <div class="homepage-post-content">
+                <h3 class="item-heading homepage-post-title mb-3">
+                  <a class="text-decoration-none" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h3>
+                <p class="item-desc mb-0">{{ post.preview | default: post.excerpt | strip_html | truncate: 180 }}</p>
+              </div>
+            </article>
+          </div>
+        {% endfor %}
+      </div>
+
+      <p id="no-results" class="text-center text-muted mt-4 d-none">No articles were found for your search.</p>
+      <div id="posts-controls" class="d-flex justify-content-center gap-2 mt-5">
+        <button id="load-more-posts" class="btn btn-primary d-none" type="button">More articles</button>
+      </div>
+    {% else %}
+      <div class="alert alert-light border text-center" role="status">
+        No posts yet. Add your first article in the <code>_posts/</code> folder.
+      </div>
+    {% endif %}
+  </div>
+</section>

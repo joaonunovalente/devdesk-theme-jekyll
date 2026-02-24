@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<div class="help-breadcrumb-container pt-4 pb-4">
+  <div class="container">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="help-content-wrapper theme-section pt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xl-9">
+        <section class="main-section order-lg-last">
+          <article class="help-article mb-5">
+            <header class="article-header mb-5">
+              <h1 class="heading-level-1 text-center mb-1">{{ page.title }}</h1>
+              <div class="article-meta mx-auto d-flex justify-content-center align-items-center">
+                <div class="meta-info-wrapper text-center">
+                  <div class="meta-time">Last updated: {{ page.date | date: "%B %-d, %Y" }}</div>
+                </div>
+              </div>
+            </header>
+
+            <div class="article-body">
+              {% if page.preview %}
+                <p class="lead">{{ page.preview }}</p>
+              {% endif %}
+
+              {{ content }}
+            </div>
+          </article>
+        </section>
+
+        <div class="d-flex justify-content-center gap-2">
+          <a href="{{ '/' | relative_url }}" class="btn btn-primary mt-5">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-xl-3 order-lg-first mt-5 mt-lg-0">
+        <div class="side-bar pt-5 pt-lg-0 sticky">
+          <h3 class="side-bar-heading mb-4">Articles</h3>
+          <nav class="side-bar-nav" aria-label="Related articles">
+            <ul class="sidebar-nav-items list-unstyled flex-column">
+              {% for post in site.posts %}
+                <li class="nav-item sidebar-post-item" data-title="{{ post.title | downcase }}">
+                  <a{% if post.url == page.url %} class="active"{% endif %} href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            <p id="sidebar-no-results" class="text-muted mt-3 mb-0 d-none">No articles were found for your search.</p>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
